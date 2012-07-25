@@ -1,0 +1,21 @@
+{
+  "name": "node-rss",
+  "version": "1.0.0",
+  "description": "Node.js package for efficently creating RSS feeds",
+  "main": "lib/node-rss.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "<git repo here>"
+  },
+  "dependencies" : {
+    "libxmljs" : "0.5.4"
+  },
+  "keywords": [
+    "rss"
+  ],
+  "author": "EJ Bensing",
+  "license": "BSD"
+}
