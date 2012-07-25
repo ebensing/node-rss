@@ -2,6 +2,10 @@
 
 A simple node.js RSS feed builder
 
+## Why another RSS module?
+
+None of the other node.js RSS modules that I could find supported the flexibility that I wanted or were too slow. Additionally, many of them seemed overly complex when all we're doing here is building a RSS feed. Not rocket science.
+
 ## Install
 
     npm install node-rss
@@ -66,11 +70,18 @@ You will also need to have the libxml2 AND libxml2-dev packages installed on you
     // now to get the XML simply call the getFeedXML function
     var xmlString = rss.getFeedXML(feed);
 
-# Other
+## Other
 
 The "feed" object has a defaults property. Inside this is a dictionary of default values. 
         cdata : a list of tag names whose content should be "escaped" in CDATA tags
 
-# tests
+## tests
 
 In the process of building these... 
+
+## TODO
+
+    - add tests
+    - add support for attributes on custom tags
+    - add some express.js middleware
+    - ?? give me suggestions
