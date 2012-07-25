@@ -8,10 +8,10 @@ A simple node.js RSS feed builder
 
 ## Dependencies
 
-    node-rss uses the libxmljs library to construct the actual feed.
-    Unfortunately, some of the features of the library that are needed are only available in the current master branch. You will need to download the libxmljs source, compile, and install it yourself. Fortunately, this is fairly straight forward. https://github.com/polotek/libxmljs/
+node-rss uses the libxmljs library to construct the actual feed.
+Unfortunately, some of the features of the library that are needed are only available in the current master branch. You will need to download the libxmljs source, compile, and install it yourself. Fortunately, this is fairly straight forward. https://github.com/polotek/libxmljs/
 
-    You will also need to have the libxml2 AND libxml2-dev packages installed on your system.
+You will also need to have the libxml2 AND libxml2-dev packages installed on your system.
 
 ## Usage
     
@@ -32,19 +32,21 @@ A simple node.js RSS feed builder
                                 'http://someurl.com/rss/MostRecent.xml', 
                                 {'CustomTag' : 'This is a custom tag under the channel tag!' });
 
-    // the additional options parameter can essentially be used to arbitrarily change the xml that will be created or other defaults.
-    // currently, it only supports basic tags, where it will take a key : value and turn it into <key>value</key>, but future releases
+    // the additional options parameter can essentially be used to 
+    // arbitrarily change the xml that will be created or other defaults.
+    // currently, it only supports basic tags, where it will take a 
+    // key : value and turn it into <key>value</key>, but future releases
     // will contain the ability to specify attributes
 
     //next, we need to add some items to the feed
     // create some dummy data to loop over...
     var blogs = [
-        {title: 'blog post 1', url : 'http://someurl.com/blog1', pubDate : new Date(), description: 'this is a description' },
-        {title: 'blog post 2', url : 'http://someurl.com/blog2', pubDate : new Date(), description: 'this is a description' },
-        {title: 'blog post 3', url : 'http://someurl.com/blog3', pubDate : new Date(), description: 'this is a description' },
-        {title: 'blog post 4', url : 'http://someurl.com/blog4', pubDate : new Date(), description: 'this is a description' },
-        {title: 'blog post 5', url : 'http://someurl.com/blog5', pubDate : new Date(), description: 'this is a description' },
-        {title: 'blog post 6', url : 'http://someurl.com/blog6', pubDate : new Date(), description: 'this is a description' },
+      {title: 'blog post 1', url : 'http://someurl.com/blog1', pubDate : new Date(), description: 'this is a description' },
+      {title: 'blog post 2', url : 'http://someurl.com/blog2', pubDate : new Date(), description: 'this is a description' },
+      {title: 'blog post 3', url : 'http://someurl.com/blog3', pubDate : new Date(), description: 'this is a description' },
+      {title: 'blog post 4', url : 'http://someurl.com/blog4', pubDate : new Date(), description: 'this is a description' },
+      {title: 'blog post 5', url : 'http://someurl.com/blog5', pubDate : new Date(), description: 'this is a description' },
+      {title: 'blog post 6', url : 'http://someurl.com/blog6', pubDate : new Date(), description: 'this is a description' },
     ];
 
     
@@ -55,7 +57,8 @@ A simple node.js RSS feed builder
     // itemLink : Link to the item
     // pubDate : Date the item was created/published
     // description : description of item
-    // fields : functions exactly like the "options" parameter of createNewFeed, allows the user to add arbitrary tags to an item
+    // fields : functions exactly like the "options" parameter of createNewFeed, 
+    // allows the user to add arbitrary tags to an item
     blogs.forEach(function (blog) {
         feed.addNewItem(blog.title, blog.url, blog.pubDate, blog.description, {});
     });
@@ -65,9 +68,9 @@ A simple node.js RSS feed builder
 
 # Other
 
-    The "feed" object has a defaults property. Inside this is a dictionary of default values. 
+The "feed" object has a defaults property. Inside this is a dictionary of default values. 
         cdata : a list of tag names whose content should be "escaped" in CDATA tags
 
 # tests
 
-    In the process of building these... 
+In the process of building these... 
