@@ -73,7 +73,7 @@ You will also need to have the libxml2 AND libxml2-dev packages installed on you
 ## Other
 
 The "feed" object has a defaults property. Inside this is a dictionary of default values. 
-        cdata : a list of tag names whose content should be "escaped" in CDATA tags
+    cdata : a list of tag names whose content should be "escaped" in CDATA tags
 
 ## tests
 
