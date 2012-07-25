@@ -8,10 +8,10 @@ var rss = require('./../lib/node-rss.js');
 // arg[3] : Author
 // arg[4] : Link to Feed
 // arg[5] : Options
-var feed = rss.createNewFeed('rm-dash-r Most Recent', 'http://www.rm-dash-r.com/',
-                              'Top 10 most recent blog entries from rm-dash-r',
+var feed = rss.createNewFeed('Blog Most Recent', 'http://someurl.com/',
+                              'Most recent blog entries from blog',
                               'EJ Bensing',
-                              'http://www.rm-dash-r.com/rss/MostRecent.xml', {'CustomTag' : 'This is a custom tag under the channel tag!' });
+                              'http://someurl.com/rss/MostRecent.xml', {'CustomTag' : 'This is a custom tag under the channel tag!' });
 
 // create some dummy data to loop over...
 var blogs = [
