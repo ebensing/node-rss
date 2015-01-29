@@ -18,7 +18,7 @@ Unfortunately, some of the features of the library that are needed are only avai
 You will also need to have the libxml2 AND libxml2-dev packages installed on your system.
 
 ## Usage
-    
+```javascript    
     // this exposes two methods: createNewFeed and getFeedXML
     var rss = require('node-rss');
 
@@ -69,7 +69,7 @@ You will also need to have the libxml2 AND libxml2-dev packages installed on you
 
     // now to get the XML simply call the getFeedXML function
     var xmlString = rss.getFeedXML(feed);
-
+```
 ## Other
 
 The "feed" object has a defaults property. Inside this is a dictionary of default values. 
