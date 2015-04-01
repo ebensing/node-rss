@@ -18,7 +18,7 @@ Unfortunately, some of the features of the library that are needed are only avai
 You will also need to have the libxml2 AND libxml2-dev packages installed on your system.
 
 ## Usage
-```javascript    
+```javascript
     // this exposes two methods: createNewFeed and getFeedXML
     var rss = require('node-rss');
 
@@ -33,12 +33,12 @@ You will also need to have the libxml2 AND libxml2-dev packages installed on you
     var feed = rss.createNewFeed('Blog Most Recent', 'http://someurl.com/',
                                 'Most recent blog entries from blog',
                                 'EJ Bensing',
-                                'http://someurl.com/rss/MostRecent.xml', 
+                                'http://someurl.com/rss/MostRecent.xml',
                                 {'CustomTag' : 'This is a custom tag under the channel tag!' });
 
-    // the additional options parameter can essentially be used to 
+    // the additional options parameter can essentially be used to
     // arbitrarily change the xml that will be created or other defaults.
-    // currently, it only supports basic tags, where it will take a 
+    // currently, it only supports basic tags, where it will take a
     // key : value and turn it into <key>value</key>, but future releases
     // will contain the ability to specify attributes
 
@@ -53,7 +53,7 @@ You will also need to have the libxml2 AND libxml2-dev packages installed on you
       {title: 'blog post 6', url : 'http://someurl.com/blog6', pubDate : new Date(), description: 'this is a description' },
     ];
 
-    
+
     // add some items to the feed
     // each feed object has a function addNewItem which should be used for adding new items
     // method signature : function addNewItem(itemTitle, itemLink, pubDate, description, fields)
@@ -61,7 +61,7 @@ You will also need to have the libxml2 AND libxml2-dev packages installed on you
     // itemLink : Link to the item
     // pubDate : Date the item was created/published
     // description : description of item
-    // fields : functions exactly like the "options" parameter of createNewFeed, 
+    // fields : functions exactly like the "options" parameter of createNewFeed,
     // allows the user to add arbitrary tags to an item
     blogs.forEach(function (blog) {
         feed.addNewItem(blog.title, blog.url, blog.pubDate, blog.description, {});
@@ -72,13 +72,13 @@ You will also need to have the libxml2 AND libxml2-dev packages installed on you
 ```
 ## Other
 
-The "feed" object has a defaults property. Inside this is a dictionary of default values. 
+The "feed" object has a defaults property. Inside this is a dictionary of default values.
 
     cdata : a list of tag names whose content should be "escaped" in CDATA tags
 
 ## tests
 
-In the process of building these... 
+In the process of building these...
 
 ## TODO
 
@@ -86,3 +86,8 @@ In the process of building these...
     - add support for attributes on custom tags
     - add some express.js middleware
     - ?? give me suggestions
+
+## Change log
+
+Version 1.0.3
+    - update libxml version to 0.13.0
