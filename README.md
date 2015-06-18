@@ -12,6 +12,8 @@ None of the other node.js RSS modules that I could find supported the flexibilit
 
 ## Dependencies
 
+Update (6/18/2015): This step should no longer be necessary.
+
 node-rss uses the libxmljs library to construct the actual feed.
 Unfortunately, some of the features of the library that are needed are only available in the current master branch. You will need to download the libxmljs source, compile, and install it yourself. Fortunately, this is fairly straight forward. https://github.com/polotek/libxmljs/
 
