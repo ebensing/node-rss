@@ -89,5 +89,8 @@ In the process of building these...
 
 ## Change log
 
+Version 1.0.4
+    - Updated libxml version to 0.14.x to support compilation on OSX (Thanks @jmathews)
+
 Version 1.0.3
     - update libxml version to 0.13.0
