@@ -10,19 +10,17 @@ None of the other node.js RSS modules that I could find supported the flexibilit
 
     npm install node-rss
 
-## Dependencies
+## Requirements
 
-Update (6/18/2015): This step should no longer be necessary.
-
-node-rss uses the libxmljs library to construct the actual feed.
-Unfortunately, some of the features of the library that are needed are only available in the current master branch. You will need to download the libxmljs source, compile, and install it yourself. Fortunately, this is fairly straight forward. https://github.com/polotek/libxmljs/
-
-You will also need to have the libxml2 AND libxml2-dev packages installed on your system.
+Node.js 20 or newer. node-rss has **no dependencies** - it builds the feed XML
+directly, so there is no native module to compile and nothing to install beyond
+the package itself.
 
 ## Usage
 ```javascript
     // this exposes two methods: createNewFeed and getFeedXML
-    var rss = require('node-rss');
+    const rss = require('node-rss');
+    // ESM works too: import { createNewFeed, getFeedXML } from 'node-rss';
 
     // first we create a "feed" object that will define your feed
     // method signature: function createNewFeed(title, link, desc, author, feedLink, options)
@@ -32,7 +30,7 @@ You will also need to have the libxml2 AND libxml2-dev packages installed on you
     // author : author of the feed
     // feedLink : link to the feed
     // options : additional options, explained below
-    var feed = rss.createNewFeed('Blog Most Recent', 'http://someurl.com/',
+    const feed = rss.createNewFeed('Blog Most Recent', 'http://someurl.com/',
                                 'Most recent blog entries from blog',
                                 'EJ Bensing',
                                 'http://someurl.com/rss/MostRecent.xml',
@@ -46,7 +44,7 @@ You will also need to have the libxml2 AND libxml2-dev packages installed on you
 
     //next, we need to add some items to the feed
     // create some dummy data to loop over...
-    var blogs = [
+    const blogs = [
       {title: 'blog post 1', url : 'http://someurl.com/blog1', pubDate : new Date(), description: 'this is a description' },
       {title: 'blog post 2', url : 'http://someurl.com/blog2', pubDate : new Date(), description: 'this is a description' },
       {title: 'blog post 3', url : 'http://someurl.com/blog3', pubDate : new Date(), description: 'this is a description' },
@@ -65,12 +63,12 @@ You will also need to have the libxml2 AND libxml2-dev packages installed on you
     // description : description of item
     // fields : functions exactly like the "options" parameter of createNewFeed,
     // allows the user to add arbitrary tags to an item
-    blogs.forEach(function (blog) {
+    for (const blog of blogs) {
         feed.addNewItem(blog.title, blog.url, blog.pubDate, blog.description, {});
-    });
+    }
 
     // now to get the XML simply call the getFeedXML function
-    var xmlString = rss.getFeedXML(feed);
+    const xmlString = rss.getFeedXML(feed);
 ```
 ## Other
 
@@ -78,18 +76,65 @@ The "feed" object has a defaults property. Inside this is a dictionary of defaul
 
     cdata : a list of tag names whose content should be "escaped" in CDATA tags
 
-## tests
+`pubDate` and `lastBuildDate` accept a `Date` and are written as RFC-1123
+strings, which is the format RSS readers expect.
 
-In the process of building these...
+## Escaping and validation
+
+node-rss escapes everything it writes, so feed content taken from user input
+cannot break out of the document:
+
+- text is XML-escaped, and CDATA-wrapped content has any `]]>` sequence split
+  so it cannot terminate the section early
+- attribute values additionally escape quotes and literal newlines
+- characters that XML 1.0 cannot represent (most control characters, unpaired
+  surrogates) are stripped
+- tag names come from your option/field keys, and an element name cannot be
+  escaped - so a key that is not a valid XML name is rejected with an error,
+  as are keys that would overwrite the feed API (`items`, `defaults`,
+  `feedLink`, `addNewItem`) or the prototype chain (`__proto__`, `constructor`,
+  `prototype`)
+
+## Tests
+
+    npm test
+
+The suite runs on the built-in `node:test` runner, so there is nothing to install.
 
 ## TODO
 
-    - add tests
     - add support for attributes on custom tags
     - add some express.js middleware
     - ?? give me suggestions
 
+## License
+
+MIT - see [LICENSE](LICENSE).
+
 ## Change log
+
+Version 2.0.0
+
+  **Breaking:** requires Node.js 20 or newer.
+
+    - Removed the libxmljs dependency. It carried unpatched critical
+      advisories (GHSA-773h-w45w-f2f9, GHSA-mg49-jqgw-gcj6,
+      GHSA-6433-x5p4-8jc7, GHSA-jv72-59wq-8rxm) with no fixed version
+      available, and it requires a node-gyp/libxml2 native build against a
+      release pinned to the Node 4 era. The feed XML is now built directly,
+      so node-rss has zero dependencies.
+    - Fixed a CDATA injection: a `]]>` sequence in a title or description
+      could terminate the CDATA section early and inject arbitrary XML.
+    - Custom tag names are now validated as XML names instead of being
+      written verbatim, and keys that would clobber the feed API or the
+      prototype chain are rejected.
+    - Characters that XML cannot represent are stripped instead of producing
+      a malformed document.
+    - `Date` values are written as RFC-1123 (matching `lastBuildDate`) rather
+      than JavaScript's default date string, which is not valid in RSS.
+    - Added a test suite and CI across Node 20, 22 and 24.
+    - Relicensed under MIT and added the missing LICENSE file. Previous
+      releases declared a bare "BSD" with no license text included.
 
 Version 1.0.5
     - Updated libxml version to 0.15.x to support node.js 4.x (Thanks @dhendo)
