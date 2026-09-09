@@ -1,21 +1,39 @@
 {
   "name": "node-rss",
-  "version": "1.0.5",
-  "description": "Node.js package for efficently creating RSS feeds",
+  "version": "2.0.0",
+  "description": "Node.js package for efficiently creating RSS feeds",
   "main": "lib/node-rss.js",
+  "type": "commonjs",
+  "exports": {
+    ".": "./lib/node-rss.js",
+    "./lib/*": "./lib/*"
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --test"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ebensing/node-rss"
+    "url": "git+https://github.com/ebensing/node-rss.git"
   },
-  "dependencies" : {
-    "libxmljs" : "0.15.x"
+  "bugs": {
+    "url": "https://github.com/ebensing/node-rss/issues"
   },
+  "homepage": "https://github.com/ebensing/node-rss#readme",
   "keywords": [
-    "rss"
+    "rss",
+    "feed",
+    "xml",
+    "atom",
+    "syndication"
   ],
   "author": "EJ Bensing",
-  "license": "BSD"
+  "license": "MIT"
 }
